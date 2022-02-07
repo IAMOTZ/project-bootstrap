@@ -1,9 +1,12 @@
-import './App.css';
+import Providers from './components/Providers'
+import Routes from './components/Routes';
 
 function App() {
   return (
-    <h1>Welcome!</h1>
-  );
+    <Providers>
+      <Routes />
+    </Providers>
+  )
 }
 
 export default App;
