@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-styled-components"
+  ],
+  "processors": [
+    "stylelint-processor-styled-components"
+  ],
+  "rules": {
+    "block-no-empty": null,
+    "color-hex-length": "long",
+    "declaration-empty-line-before": null,
+    "length-zero-no-unit": null,
+    "font-family-no-missing-generic-family-keyword": null,
+    "declaration-colon-newline-after": null
+  }
+}
