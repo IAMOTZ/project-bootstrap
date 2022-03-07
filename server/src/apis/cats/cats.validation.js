@@ -1,61 +1,43 @@
 import Joi from 'joi';
+import { createValidationMiddleware } from '../core/Validation/decorators';
 import JoiValidation from '../core/Validation/JoiValidation';
 
 class CatsValidation extends JoiValidation {
-  getCat = (req, res, next) => {
-    const getCatSchema = Joi.object({
+  @createValidationMiddleware()
+  getCat = req => ({
+    schema: Joi.object({
       catId: Joi.number().required(),
-    });
+    }),
+    data: req.params,
+  })
 
-    const requestData = this.validate(getCatSchema, { ...req.params });
-    if (requestData.error) {
-      return res.status(400).json({ message: 'Invalid Request', errors: requestData.error });
-    }
-    req.body = requestData;
-    return next();
-  }
-
-  createCat = (req, res, next) => {
-    const createCatSchema = Joi.object({
+  @createValidationMiddleware()
+  createCat = req => ({
+    schema: Joi.object({
       name: Joi.string().required(),
       age: Joi.number(),
-    });
+    }),
+    data: req.body,
+  })
 
-    const requestData = this.validate(createCatSchema, req.body);
-    if (requestData.error) {
-      return res.status(400).json({ message: 'Invalid Request', errors: requestData.error });
-    }
-    req.body = requestData;
-    return next();
-  }
-
-  updateCat = (req, res, next) => {
-    const updateCatSchema = Joi.object({
+  @createValidationMiddleware()
+  updateCat = req => ({
+    schema: Joi.object({
       catId: Joi.number().required(),
       name: Joi.string(),
       age: Joi.number(),
-    });
+    }),
+    data: { ...req.params, ...req.body },
+  })
 
-    const requestData = this.validate(updateCatSchema, { ...req.body, ...req.params });
-    if (requestData.error) {
-      return res.status(400).json({ message: 'Invalid Request', errors: requestData.error });
-    }
-    req.body = requestData;
-    return next();
-  }
-
-  deleteCat = (req, res, next) => {
-    const deleteCatSchema = Joi.object({
+  @createValidationMiddleware()
+  deleteCat = req => ({
+    schema: Joi.object({
       catId: Joi.number().required(),
-    });
-
-    const requestData = this.validate(deleteCatSchema, { ...req.params });
-    if (requestData.error) {
-      return res.status(400).json({ message: 'Invalid Request', errors: requestData.error });
-    }
-    req.body = requestData;
-    return next();
-  }
+    }),
+    data: req.params,
+  })
 }
+
 
 export default new CatsValidation();

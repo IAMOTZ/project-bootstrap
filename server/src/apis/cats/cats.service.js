@@ -6,9 +6,7 @@ class CatsService {
     this.cats = [];
   }
 
-  getCats = async () => {
-    return this.cats;
-  }
+  getCats = async () => this.cats;
 
   getCat = async (catId) => {
     const { cat } = await this.confirmCatExists(catId);
