@@ -8,6 +8,7 @@
     "start": "npm run build && node ./build/index.js",
     "start:dev": "nodemon ./src/index.js --exec babel-node  --delay 1500ms",
     "build": "babel ./src -d ./build",
+    "migrate": "sequelize db:migrate",
     "lint": "./node_modules/.bin/eslint ./src"
   },
   "dependencies": {
@@ -20,7 +21,8 @@
     "express": "^4.16.4",
     "joi": "^17.5.0",
     "morgan": "^1.9.1",
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "sequelize": "^6.17.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",
