@@ -1,41 +1,43 @@
 import ServiceError from '../core/Errors/ServiceError';
-import Cat from './cats.model';
+import Cat from '../../db/models/cat';
+
 
 class CatsService {
   constructor() {
     this.cats = [];
   }
 
-  getCats = async () => this.cats;
+  getCats = async () => Cat.findAll();
 
   getCat = async (catId) => {
-    const { cat } = await this.confirmCatExists(catId);
+    const cat = await this.confirmCatExists(catId);
     return cat;
   }
 
   createCat = async ({ name, age }) => {
-    const cat = new Cat(name, age, this.cats.length + 1);
-    this.cats.push(cat);
+    const cat = new Cat({ name, age });
+    await cat.save();
     return cat;
   }
 
   updateCat = async (catId, { name, age }) => {
-    const { cat } = await this.confirmCatExists(catId);
-    cat.name = name;
-    cat.age = age;
+    const cat = await this.confirmCatExists(catId);
+    cat.name = name ?? cat.name;
+    cat.age = age ?? cat.age;
+    await cat.save();
     return cat;
   }
 
   deleteCat = async (catId) => {
-    const { index } = await this.confirmCatExists(catId);
-    this.cats.splice(index, 1);
+    const cat = await this.confirmCatExists(catId);
+    await cat.destroy();
   }
 
   confirmCatExists = async (catId) => {
-    const catIndex = this.cats.findIndex(cat => cat.id === catId);
-    if (catIndex < 0) throw new ServiceError(404, {}, 'Cat not found');
+    const cat = await Cat.findByPk(catId);
 
-    return { cat: this.cats[catIndex], index: catIndex };
+    if (!cat) throw new ServiceError(404, {}, 'Cat not found');
+    return cat;
   }
 }
 

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build && node ./build/index.js",
-    "start:dev": "nodemon ./src/index.js --exec babel-node  --delay 1500ms",
+    "start:dev": "nodemon ./src/index.js --exec babel-node  --delay 1000ms",
     "build": "babel ./src -d ./build",
     "migrate": "sequelize db:migrate",
     "lint": "./node_modules/.bin/eslint ./src"

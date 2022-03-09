@@ -14,6 +14,7 @@ Cat.init({
 }, {
   sequelize: sequelizeInstance,
   modelName: 'cat',
+  freezeTableName: true,
 });
 
 export default Cat;
