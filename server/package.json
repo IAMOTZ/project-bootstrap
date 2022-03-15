@@ -9,7 +9,11 @@
     "start:dev": "nodemon ./src/index.js --exec babel-node  --delay 1000ms",
     "build": "babel ./src -d ./build",
     "migrate": "sequelize db:migrate",
-    "lint": "./node_modules/.bin/eslint ./src"
+    "lint": "./node_modules/.bin/eslint ./src",
+    "prepare": "cd .. && husky install server/.husky"
+  },
+  "lint-staged": {
+    "*.js": "eslint"
   },
   "dependencies": {
     "@babel/cli": "^7.17.6",
@@ -30,7 +34,9 @@
     "eslint": "^5.14.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
+    "husky": "^7.0.0",
     "jest": "^27.4.7",
+    "lint-staged": "^12.3.5",
     "sequelize-cli": "^6.4.1",
     "supertest": "^6.2.2"
   },
