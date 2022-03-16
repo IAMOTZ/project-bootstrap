@@ -26,13 +26,18 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint:styles": "stylelint ./src/**/*.js --config js.stylelintrc.json"
+    "lint:styles": "stylelint ./src/**/*.js --config js.stylelintrc.json",
+    "prepare": "cd .. && husky install client/.husky"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ]
+  },
+  "lint-staged": {
+    "*.js": "eslint",
+    "**/*.js": "stylelint --config js.stylelintrc.json"
   },
   "browserslist": {
     "production": [
@@ -47,6 +52,8 @@
     ]
   },
   "devDependencies": {
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.5",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^18.3.0",
     "stylelint-config-styled-components": "^0.1.1",
