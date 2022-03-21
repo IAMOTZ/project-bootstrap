@@ -14,7 +14,7 @@ class CatsController {
 
   @catchControllerError
   getCat = async (req, res) => {
-    const cat = await this.catsService.getCat(+req.params.catId);
+    const cat = await this.catsService.getCat(req.params.catId);
     return res.status(200).json({ data: cat });
   }
 
@@ -26,13 +26,13 @@ class CatsController {
 
   @catchControllerError
   updateCat = async (req, res) => {
-    const updatedCat = await this.catsService.updateCat(+req.params.catId, req.body);
+    const updatedCat = await this.catsService.updateCat(req.params.catId, req.body);
     return res.status(200).json({ data: updatedCat });
   }
 
   @catchControllerError
   deleteCat = async (req, res) => {
-    await this.catsService.deleteCat(+req.params.catId);
+    await this.catsService.deleteCat(req.params.catId);
     return res.status(204).end();
   }
 }

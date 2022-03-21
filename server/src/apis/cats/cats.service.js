@@ -7,7 +7,7 @@ class CatsService {
     this.cats = [];
   }
 
-  getCats = async () => Cat.findAll();
+  getCats = async () => Cat.find();
 
   getCat = async (catId) => {
     const cat = await this.confirmCatExists(catId);
@@ -29,12 +29,12 @@ class CatsService {
   }
 
   deleteCat = async (catId) => {
-    const cat = await this.confirmCatExists(catId);
-    await cat.destroy();
+    await this.confirmCatExists(catId);
+    await Cat.deleteOne({ _id: catId });
   }
 
   confirmCatExists = async (catId) => {
-    const cat = await Cat.findByPk(catId);
+    const cat = await Cat.findById(catId);
 
     if (!cat) throw new ServiceError(404, {}, 'Cat not found');
     return cat;

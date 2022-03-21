@@ -6,7 +6,7 @@ class CatsValidation extends JoiValidation {
   @createValidationMiddleware()
   getCat = req => ({
     schema: Joi.object({
-      catId: Joi.number().required(),
+      catId: Joi.string().required(),
     }),
     data: req.params,
   })
@@ -23,7 +23,7 @@ class CatsValidation extends JoiValidation {
   @createValidationMiddleware()
   updateCat = req => ({
     schema: Joi.object({
-      catId: Joi.number().required(),
+      catId: Joi.string().required(),
       name: Joi.string(),
       age: Joi.number(),
     }),
@@ -33,7 +33,7 @@ class CatsValidation extends JoiValidation {
   @createValidationMiddleware()
   deleteCat = req => ({
     schema: Joi.object({
-      catId: Joi.number().required(),
+      catId: Joi.string().required(),
     }),
     data: req.params,
   })

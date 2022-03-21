@@ -1,20 +1,10 @@
-import { DataTypes, Model } from 'sequelize';
-import sequelizeInstance from '../sequelize';
+import mongoose from 'mongoose';
 
-class Cat extends Model {}
+const { Schema } = mongoose;
 
-Cat.init({
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  age: {
-    type: DataTypes.INTEGER,
-  }
-}, {
-  sequelize: sequelizeInstance,
-  modelName: 'cat',
-  freezeTableName: true,
+const catSchema = new Schema({
+  name: { type: String, required: true },
+  age: { type: Number },
 });
 
-export default Cat;
+export default mongoose.model('Cat', catSchema);

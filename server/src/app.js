@@ -2,6 +2,7 @@ import express from 'express';
 import logger from 'morgan';
 import dotEnv from 'dotenv';
 import api from './apis';
+import dbSetup from './db/setup';
 
 dotEnv.config();
 
@@ -20,5 +21,7 @@ app.all('*', (req, res, next) => {
 });
 
 api(app);
+
+dbSetup();
 
 export default app;
